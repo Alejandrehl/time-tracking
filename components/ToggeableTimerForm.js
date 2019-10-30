@@ -1,16 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import {View, StyleSheet} from "react-native";
 
 import TimerButton from "./TimerButton";
 import TimerForm from "./TimerForm";
 
-const ToggeableTimerForm = ({isOpen}) => {
+const ToggeableTimerForm = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const handleFormOpen = () => setIsOpen(true);
+
     return (
         <View style={[styles.container, !isOpen && styles.buttonPadding]}>
             {isOpen ? (
                 <TimerForm/>
             ) : (
-                <TimerButton title="+" color="black"/>
+                <TimerButton
+                    title="+"
+                    color="black"
+                    onPress={handleFormOpen}
+                />
             )}
         </View>
     );
