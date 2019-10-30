@@ -30,6 +30,22 @@ const App = () => {
         setTimers([newTimer(timer), ...timers]);
     };
 
+    const handleFormSubmit = attrs => {
+        setTimers(timers.map(timer => {
+                if (timer.id === attrs.id) {
+                    const {title, project} = attrs;
+
+                    return {
+                        ...timer,
+                        title,
+                        project
+                    };
+                }
+                return timer;
+            })
+        );
+    };
+
     return (
         <View style={styles.appContainer}>
             <View style={styles.titleContainer}>
@@ -46,6 +62,7 @@ const App = () => {
                             project={project}
                             elapsed={elapsed}
                             isRunning={isRunning}
+                            onFormSubmit={handleFormSubmit}
                         />
                     )
                 )}

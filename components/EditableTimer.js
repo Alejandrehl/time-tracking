@@ -3,10 +3,23 @@ import React, {useState} from "react";
 import TimerForm from "./TimerForm";
 import Timer from "./Timer";
 
-const EditableTimer = ({id, title, project, elapsed, isRunning}) => {
+const EditableTimer = ({id, title, project, elapsed, isRunning, onFormSubmit}) => {
     const [editFormOpen, setEditFormOpen] = useState(false);
 
-    if (editFormOpen) return <TimerForm id={id} title={title} project={project}/>;
+    const handleSubmit = timer => {
+        onFormSubmit(timer);
+        closeForm();
+    };
+
+    const handleEditPress = () => openForm();
+    const handleFormClose = () => closeForm();
+
+    const openForm = () => setEditFormOpen(true);
+    const closeForm = () => setEditFormOpen(false);
+
+
+    if (editFormOpen) return <TimerForm id={id} title={title} project={project} onFormSubmit={handleSubmit}
+                                        onFormClose={handleFormClose}/>;
 
     return (
         <Timer
@@ -15,6 +28,7 @@ const EditableTimer = ({id, title, project, elapsed, isRunning}) => {
             project={project}
             elapsed={elapsed}
             isRunning={isRunning}
+            onEditPress={handleEditPress}
         />
     );
 };
