@@ -1,16 +1,28 @@
 import React from "react";
-import {View, StyleSheet, Text} from "react-native";
+import {View, StyleSheet} from "react-native";
 
-const ToggeableTimerForm = () => {
+import TimerButton from "./TimerButton";
+import TimerForm from "./TimerForm";
+
+const ToggeableTimerForm = ({isOpen}) => {
     return (
-        <View>
-            <Text>
-                Toggeable Timer Form
-            </Text>
+        <View style={[styles.container, !isOpen && styles.buttonPadding]}>
+            {isOpen ? (
+                <TimerForm/>
+            ) : (
+                <TimerButton title="+" color="black"/>
+            )}
         </View>
     );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        paddingVertical: 10
+    },
+    buttonPadding: {
+        paddingHorizontal: 15
+    }
+});
 
 export default ToggeableTimerForm;
