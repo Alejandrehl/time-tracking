@@ -3,7 +3,7 @@ import {View, StyleSheet, Text, TextInput} from "react-native";
 
 import TimerButtom from "./TimerButton";
 
-const TimerForm = ({id, title, project}) => {
+const TimerForm = ({id, title, project, onFormClose, onFormSubmit}) => {
     const [titleState, setTitleState] = useState(id ? title : '');
     const [projectState, setProjectState] = useState(id ? project : '');
 
@@ -15,6 +15,16 @@ const TimerForm = ({id, title, project}) => {
 
     const handleProjectChange = project => {
         setProjectState(project);
+    };
+
+    const handleSubmit = () => {
+        const data = {
+            id,
+            title: titleState,
+            project: projectState
+        };
+
+        onFormSubmit(data);
     };
 
     return (
@@ -42,8 +52,8 @@ const TimerForm = ({id, title, project}) => {
                 </View>
             </View>
             <View style={styles.buttonGroup}>
-                <TimerButtom small color="#21BA45" title={submitText}/>
-                <TimerButtom small color="#DB2828" title="Cancel"/>
+                <TimerButtom small color="#21BA45" title={submitText} onPress={handleSubmit}/>
+                <TimerButtom small color="#DB2828" title="Cancel" onPress={onFormClose}/>
             </View>
         </View>
     );
