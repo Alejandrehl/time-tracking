@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import {View, StyleSheet, Text, TextInput} from "react-native";
 
 import TimerButtom from "./TimerButton";
 
 const TimerForm = ({id, title, project}) => {
+    const [titleState, setTitleState] = useState(id ? title : '');
+    const [projectState, setProjectState] = useState(id ? project : '');
+
     const submitText = id ? 'Update' : 'Create';
+
+    const handleTitleChange = title => {
+        setTitleState(title);
+    };
+
+    const handleProjectChange = project => {
+        setProjectState(project);
+    };
 
     return (
         <View style={styles.formContainer}>
@@ -14,7 +25,8 @@ const TimerForm = ({id, title, project}) => {
                     <TextInput
                         style={styles.textInput}
                         underlineColorAndroid="transparent"
-                        defaultValue={title}
+                        onChangeText={handleTitleChange}
+                        value={titleState}
                     />
                 </View>
             </View>
@@ -24,7 +36,8 @@ const TimerForm = ({id, title, project}) => {
                     <TextInput
                         style={styles.textInput}
                         underlineColorAndroid="transparent"
-                        defaultValue={project}
+                        onChangeText={handleProjectChange}
+                        value={projectState}
                     />
                 </View>
             </View>
