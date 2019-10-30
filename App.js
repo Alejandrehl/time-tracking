@@ -46,6 +46,10 @@ const App = () => {
         );
     };
 
+    const handleOnRemovePress = timerId => {
+        setTimers(timers.filter(timer => timer.id !== timerId));
+    };
+
     return (
         <View style={styles.appContainer}>
             <View style={styles.titleContainer}>
@@ -63,6 +67,7 @@ const App = () => {
                             elapsed={elapsed}
                             isRunning={isRunning}
                             onFormSubmit={handleFormSubmit}
+                            onRemovePress={handleOnRemovePress}
                         />
                     )
                 )}
