@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 
 import uuidv4 from "uuid/v4";
@@ -9,6 +9,7 @@ import ToggleableTimerForm from "./components/ToggeableTimerForm";
 
 
 const App = () => {
+    const TIME_INTERVAL = 1000;
     const [timers, setTimers] = useState([
         {
             title: "Mow the lawn",
@@ -25,6 +26,21 @@ const App = () => {
             isRunning: false
         }
     ]);
+
+    useEffect(() => {
+        this.intervalId = setInterval(() => {
+            setTimers(timers.map(timer => {
+                const {elapsed, isRunning} = timer;
+
+                return {
+                    ...timer,
+                    elapsed: isRunning ? elapsed + TIME_INTERVAL : elapsed
+                };
+            }));
+        }, TIME_INTERVAL)
+
+        clearInterval(this.intervalId);
+    }, []);
 
     const handleCreateFormSubmit = timer => {
         setTimers([newTimer(timer), ...timers]);

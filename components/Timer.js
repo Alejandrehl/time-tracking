@@ -4,11 +4,31 @@ import {StyleSheet, View, Text} from "react-native";
 import {millisecondsToHuman} from "../utils/TimerUtils";
 import TimerButton from "./TimerButton";
 
-const Timer = ({id, title, project, elapsed, onEditPress, onRemovePress}) => {
+const Timer = ({id, title, project, elapsed, onEditPress, onRemovePress, onStartPress, onStopPress, isRunning}) => {
     const elapsedString = millisecondsToHuman(elapsed);
 
     const handleRemovePress = () => {
         onRemovePress(id);
+    };
+
+    const handleStartPress = () => {
+        onStartPress(id);
+    };
+
+    const handleStopPress = () => {
+        onStopPress(id);
+    };
+
+    const renderActionButton = () => {
+        if (isRunning) {
+            return (
+                <TimerButton color="#DB2828" small title="Stop" onPress={handleStopPress}/>
+            );
+        }
+
+        return (
+            <TimerButton color="#21BA45" small title="Start" onPress={handleStartPress}/>
+        );
     };
 
     return (
@@ -20,7 +40,7 @@ const Timer = ({id, title, project, elapsed, onEditPress, onRemovePress}) => {
                 <TimerButton color="blue" small title="Edit" onPress={onEditPress} onRemovePress={onRemovePress}/>
                 <TimerButton color="blue" small title="Remove" onPress={handleRemovePress}/>
             </View>
-            <TimerButton color="#21BA45" small title="Start"/>
+            {renderActionButton()}
         </View>
     );
 };
