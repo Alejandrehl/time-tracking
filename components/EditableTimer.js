@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import TimerForm from "./TimerForm";
 import Timer from "./Timer";
 
-const EditableTimer = ({id, title, project, elapsed, isRunning, onFormSubmit, onRemovePress}) => {
+const EditableTimer = ({id, title, project, elapsed, isRunning, onFormSubmit, onRemovePress, onStartPress, onStopPress}) => {
     const [editFormOpen, setEditFormOpen] = useState(false);
 
     const handleSubmit = timer => {
@@ -30,6 +30,8 @@ const EditableTimer = ({id, title, project, elapsed, isRunning, onFormSubmit, on
             isRunning={isRunning}
             onEditPress={handleEditPress}
             onRemovePress={onRemovePress}
+            onStartPress={onStartPress}
+            onStopPress={onStopPress}
         />
     );
 };

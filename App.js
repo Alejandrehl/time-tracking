@@ -66,6 +66,22 @@ const App = () => {
         setTimers(timers.filter(timer => timer.id !== timerId));
     };
 
+    const toggleTimer = timerId => {
+        setTimers(timers.map(timer => {
+                const {id, isRunning} = timer;
+
+                if (id === timerId) {
+                    return {
+                        ...timer,
+                        isRunning: !isRunning
+                    };
+                }
+
+                return timer;
+            })
+        )
+    };
+
     return (
         <View style={styles.appContainer}>
             <View style={styles.titleContainer}>
@@ -84,6 +100,8 @@ const App = () => {
                             isRunning={isRunning}
                             onFormSubmit={handleFormSubmit}
                             onRemovePress={handleOnRemovePress}
+                            onStartPress={toggleTimer}
+                            onStopPress={toggleTimer}
                         />
                     )
                 )}
