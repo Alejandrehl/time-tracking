@@ -1,4 +1,4 @@
-import React from "react-native";
+import React from "react";
 import {StyleSheet, View, Text} from "react-native";
 
 import {millisecondsToHuman} from "../utils/TimerUtils";
